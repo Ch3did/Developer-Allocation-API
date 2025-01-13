@@ -16,11 +16,12 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import include, path  # Importa 'include' para incluir as rotas da API
+from django.urls import (
+    include, path)
 
 from api.url import urlpatterns
 
 urlpatterns = [
     path("admin/", admin.site.urls),  # Rota do Django Admin
-    path("api/", include(urlpatterns)),  # Incluindo as rotas da API
+    path("api/", include(urlpatterns)),  # Rotas da API
 ]

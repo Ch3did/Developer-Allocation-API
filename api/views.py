@@ -1,16 +1,11 @@
 from rest_framework import viewsets
 
-from api.serializers.serializer import (
-    AlocacaoSerializer,
-    ProgramadorSerializer,
-    ProjetoSerializer,
-    TecnologiaSerializer,
-)
-
 from .models import Alocacao
 from .models.programador import Programador
 from .models.projeto import Projeto
 from .models.tecnologia import Tecnologia
+from .serializers import (AlocacaoSerializer, ProgramadorSerializer,
+                          ProjetoSerializer, TecnologiaSerializer)
 
 
 class TecnologiaViewSet(viewsets.ModelViewSet):

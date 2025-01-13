@@ -1,11 +1,7 @@
 from rest_framework.routers import DefaultRouter
 
-from .views import (
-    AlocacaoViewSet,
-    ProgramadorViewSet,
-    ProjetoViewSet,
-    TecnologiaViewSet,
-)
+from .views import (AlocacaoViewSet, ProgramadorViewSet, ProjetoViewSet,
+                    TecnologiaViewSet)
 
 router = DefaultRouter()
 router.register("tecnologias", TecnologiaViewSet)

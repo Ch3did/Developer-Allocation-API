@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models.models import Alocacao, Programador, Projeto, Tecnologia
+from .models import Alocacao, Programador, Projeto, Tecnologia
 
 
 @admin.register(Tecnologia)
