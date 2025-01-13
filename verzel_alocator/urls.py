@@ -16,12 +16,26 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import (
-    include, path)
+from django.urls import include, path
 
 from api.url import urlpatterns
+from verzel_alocator.views import HealthCheckView, schema_view
 
 urlpatterns = [
-    path("admin/", admin.site.urls),  # Rota do Django Admin
-    path("api/", include(urlpatterns)),  # Rotas da API
+    # Rota do Django Admin
+    path("admin/", admin.site.urls),
+    # Rotas da API
+    path("api/", include(urlpatterns)),
+    # Health Check
+    path(
+        "health/",
+        HealthCheckView.as_view(),
+        name="Health Check",
+    ),
+    # Swagger
+    path(
+        "swagger/",
+        schema_view.with_ui("swagger", cache_timeout=0),
+        name="Schema-swagger-ui",
+    ),
 ]
