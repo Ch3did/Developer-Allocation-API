@@ -69,3 +69,6 @@ celerybeat-schedule
 
 # Admin files
 admin.pyc
+
+
+.env
