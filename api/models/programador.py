@@ -1,6 +1,6 @@
 from django.db import models
 
-from ..models.tecnologias import Tecnologia
+from .tecnologia import Tecnologia
 
 
 class Programador(models.Model):
