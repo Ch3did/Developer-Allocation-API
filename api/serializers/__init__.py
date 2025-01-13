@@ -1,0 +1,4 @@
+from .alocacao_serializer import AlocacaoSerializer
+from .programador_serializer import ProgramadorSerializer
+from .projeto_serializer import ProjetoSerializer
+from .tecnologia_serializer import TecnologiaSerializer
