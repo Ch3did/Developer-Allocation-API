@@ -1,16 +1,4 @@
-version: '3.9'
-
 services:
-  db:
-    image: postgres:13
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: verzel
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-    networks:
-      - backend
 
   web:
     build: .
@@ -22,9 +10,13 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=postgres://user:password@db:5432/verzel
-    networks:
-      - backend
+      - DATABASE_URL=postgres://postgres:postgres@db:5432/verzel
 
-volumes:
-  postgres_data:
+  db:
+    image: postgres:15
+    ports:
+      - "5432:5432" 
+    environment:
+      POSTGRES_DB: verzel
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
