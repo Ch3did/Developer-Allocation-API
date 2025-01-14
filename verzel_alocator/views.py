@@ -4,18 +4,6 @@ from rest_framework import status, views
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-schema_view = get_schema_view(
-    openapi.Info(
-        title="API Documentation",
-        default_version="v1",
-        description="Descrição da sua API",
-        terms_of_service="https://www.google.com/policies/terms/",
-        contact=openapi.Contact(email="suporte@exemplo.com"),
-        license=openapi.License(name="MIT License"),
-    ),
-    public=True,
-    permission_classes=[AllowAny],
-)
 
 
 class HealthCheckView(views.APIView):

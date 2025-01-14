@@ -17,9 +17,10 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import include, path
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from api.url import urlpatterns
-from verzel_alocator.views import HealthCheckView, schema_view
+from verzel_alocator.views import HealthCheckView
 
 urlpatterns = [
     # Rota do Django Admin
@@ -35,7 +36,9 @@ urlpatterns = [
     # Swagger
     path(
         "swagger/",
-        schema_view.with_ui("swagger", cache_timeout=0),
-        name="Schema-swagger-ui",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
     ),
+    # Endpoint do esquema OpenAPI
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
 ]
