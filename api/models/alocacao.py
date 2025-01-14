@@ -11,7 +11,7 @@ class Alocacao(models.Model):
     programador = models.ForeignKey(
         Programador, on_delete=models.CASCADE, related_name="alocacoes"
     )
-    horas = models.PositiveIntegerField()
+    horas = models.PositiveIntegerField(default=8)
 
     def __str__(self):
         return f"{self.programador} -> {self.projeto}"

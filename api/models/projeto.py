@@ -8,6 +8,7 @@ class Projeto(models.Model):
     data_inicial = models.DateField()
     data_final = models.DateField()
     tecnologias = models.ManyToManyField(Tecnologia, related_name="projetos")
+    horas_por_dia = models.IntegerField(default=8)
 
     def __str__(self):
         return self.nome

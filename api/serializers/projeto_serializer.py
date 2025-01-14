@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import Projeto, Tecnologia
+from ..models import Projeto
 from .tecnologia_serializer import TecnologiaSerializer
 
 
@@ -11,10 +11,23 @@ class ProjetoSerializer(serializers.ModelSerializer):
         model = Projeto
         fields = "__all__"
 
-    def create(self, validated_data):
-        tecnologias_data = validated_data.pop("tecnologias")
-        projeto = Projeto.objects.create(**validated_data)
-        for tecnologia_data in tecnologias_data:
-            tecnologia, _ = Tecnologia.objects.get_or_create(**tecnologia_data)
-            projeto.tecnologias.add(tecnologia)
-        return projeto
+
+class ProjetoSerializerUpdate(serializers.Serializer):
+    projeto_id = serializers.IntegerField(write_only=True, required=True)
+    tecnologias_id = serializers.ListField(
+        child=serializers.IntegerField(), write_only=True, required=True
+    )
+    nome = serializers.CharField(write_only=True, required=False)
+    data_inicial = serializers.DateField(required=False, allow_null=True)
+    data_final = serializers.DateField(required=False, allow_null=True)
+    horas_por_dia = serializers.IntegerField(required=False, default=8)
+
+
+class ProjetoSerializerCreate(serializers.Serializer):
+    tecnologias_id = serializers.ListField(
+        child=serializers.IntegerField(), write_only=True, required=True
+    )
+    nome = serializers.CharField(write_only=True, required=False)
+    data_inicial = serializers.DateField(required=False, allow_null=True)
+    data_final = serializers.DateField(required=False, allow_null=True)
+    horas_por_dia = serializers.IntegerField(required=False, default=8)
