@@ -64,9 +64,6 @@ dmypy.json
 # Celery beat schedule file
 celerybeat-schedule
 
-# Django migrations
-*/migrations/*
-
 # Admin files
 admin.pyc
 
