@@ -5,18 +5,26 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
+    networks:
+      - verzel_network
     ports:
       - "8000:8000"
     depends_on:
       - db
-    environment:
-      - DATABASE_URL=postgres://postgres:postgres@db:5432/verzel
+    env_file:
+      - .env
 
   db:
     image: postgres:15
+    networks:
+      - verzel_network
     ports:
       - "5432:5432" 
     environment:
       POSTGRES_DB: verzel
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
+
+networks:
+  verzel_network:
+    driver: bridge
