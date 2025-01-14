@@ -7,6 +7,8 @@ WORKDIR /app
 
 COPY . /app/
 
+RUN cp env_credentials .env
+
 RUN pip3 install -r requirements.txt
 
 EXPOSE 8000
