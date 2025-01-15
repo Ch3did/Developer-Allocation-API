@@ -13,7 +13,11 @@ A aplicação utiliza Docker Compose para facilitar a configuração e execuçã
    ```bash
    git clone git@github.com:Ch3did/verzel.git
    cd verzel/
-3. Execute o comando para iniciar o ambiente:
+3. Crie um .env com base no arquivo env_credentials
+   ```bash
+   cp env_credentials .env
+
+4. Execute o comando para iniciar o ambiente:
    ```bash
    docker-compose up -d --build
 
