@@ -33,18 +33,18 @@ class ProjetoViewSet(viewsets.ModelViewSet):
         except ValidationError as e:
             return Response({"error": e.args[0]}, status=status.HTTP_400_BAD_REQUEST)
 
-        programador = Projeto.objects.create(
+        projeto = Projeto.objects.create(
             nome=validated_data["nome"],
             data_inicial=validated_data["data_inicial"],
             data_final=validated_data["data_final"],
             horas_por_dia=validated_data["horas_por_dia"],
         )
 
-        programador.tecnologias.set(tecnologias)
-        programador.save()
+        projeto.tecnologias.set(tecnologias)
+        projeto.save()
 
         return Response(
-            {"message": "Programador criado com sucesso!"},
+            {"message": "Projeto criado com sucesso!"},
             status=status.HTTP_201_CREATED,
         )
 
