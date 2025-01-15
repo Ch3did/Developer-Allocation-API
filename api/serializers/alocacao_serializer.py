@@ -11,16 +11,12 @@ class AlocacaoSerializer(serializers.ModelSerializer):
 
 class AlocacaoSerializerCreate(serializers.Serializer):
     projeto_id = serializers.IntegerField(write_only=True, required=True)
-    programadores_id = serializers.ListField(
-        child=serializers.IntegerField(), write_only=True, required=True
-    )
+    programador_id = serializers.IntegerField(required=False)
     horas = alocacao_id = serializers.IntegerField(required=False)
 
 
 class AlocacaoSerializerUpdate(serializers.Serializer):
-    alocacao_id = serializers.IntegerField(write_only=True, required=True)
-    projeto_id = serializers.IntegerField(write_only=True, required=True)
-    programadores_id = serializers.ListField(
-        child=serializers.IntegerField(), write_only=True, required=True
-    )
+    alocacao_id = serializers.IntegerField(write_only=True, required=False)
+    projeto_id = serializers.IntegerField(write_only=True, required=False)
+    programador_id = serializers.IntegerField(required=False)
     horas = alocacao_id = serializers.IntegerField(required=False)
