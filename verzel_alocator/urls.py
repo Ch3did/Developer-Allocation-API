@@ -22,13 +22,11 @@ from rest_framework_simplejwt.views import (TokenObtainPairView,
                                             TokenRefreshView)
 
 from api.url import urlpatterns
-from api.views.base import HealthCheckView
+from api.views.base import HealthCheckView, RegisterUserView
 
 urlpatterns = [
     # Rota do Django Admin
     path("admin/", admin.site.urls),
-    # Rotas da API
-    path("api/", include(urlpatterns)),
     # Health Check
     path(
         "health/",
@@ -47,4 +45,8 @@ urlpatterns = [
     path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     # refresh token
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    # Registra usuario
+    path("register/", RegisterUserView.as_view(), name="register_user"),
+     # Rotas da API
+    path("api/", include(urlpatterns)),
 ]
