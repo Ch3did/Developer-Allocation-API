@@ -13,7 +13,7 @@ class TecnologiaViewSet(viewsets.ModelViewSet):
     queryset = Tecnologia.objects.all()
     serializer_class = TecnologiaSerializer
     pagination_class = CustomPagination
-    authentication_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     def update(self, request, *args, **kwargs):
         return self._custom_update(request, *args, **kwargs)

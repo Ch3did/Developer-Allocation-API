@@ -15,7 +15,7 @@ class ProgramadorViewSet(viewsets.ModelViewSet):
     queryset = Programador.objects.all()
     serializer_class = ProgramadorSerializer
     pagination_class = CustomPagination
-    authentication_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     @extend_schema(
         summary="Cria Objeto Alocacao",

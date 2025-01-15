@@ -15,7 +15,7 @@ class AlocacaoViewSet(viewsets.ModelViewSet):
     queryset = Alocacao.objects.all()
     serializer_class = AlocacaoSerializer
     pagination_class = CustomPagination
-    authentication_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     @extend_schema(
         summary="Cria Objeto Alocacao",
