@@ -11,6 +11,8 @@ class HealthCheckView(views.APIView):
     View para verificar o status de saúde da aplicação.
     """
 
+    permission_classes = [AllowAny]
+
     def get(self, request, *args, **kwargs):
         data = {
             "status": "ok",
