@@ -24,7 +24,7 @@ A aplicação utiliza Docker Compose para facilitar a configuração e execuçã
 
 ## First Usage 
 
-Após a instalação, a aplicação estará disponível no endereço: http://localhost:8000. Você pode verificar seu funcionamento acessando a rota **/health**. Todas as demais rotas da aplicação são protegidas por autenticação JWT. Para obter um token, acesse a rota **/token**. Caso ainda não tenha um usuário, será necessário registrá-lo através da rota **/register**.
+Após a instalação, a aplicação estará disponível no endereço: http://localhost:8000. Você pode verificar seu funcionamento acessando a rota **/health**. Todas as demais rotas da aplicação são protegidas por autenticação JWT. Para obter um token, acesse a rota **/token**. Caso ainda não tenha um usuário, será necessário registrá-lo através da rota **/register**. Caso nescessario
 
 ### **Como Usar o Token JWT**
 
@@ -41,22 +41,22 @@ Após a instalação, a aplicação estará disponível no endereço: http://loc
    ```
 
 ## Endpoints
+Abaixo estão todas as rotas disponíveis para uso da aplicação. Caso deseje, a aplicação também conta com um Swagger na rota **/swagger**.
 
-
-### 1. Listagem de Alocações - /alocacoes/
+### 1. Listagem de Alocações - /api/alocacoes/
 
 - **Endpoint**: `/api/alocacoes/`
 - **Métodos**: `GET`
 - **Descrição**: Retorna a lista de todas as alocações, com informações detalhadas sobre os programadores e projetos alocados.
 
-### 2. Criar Alocação - /alocacoes/
+### 2. Criar Alocação - /api/alocacoes/
 
 - **Endpoint**: `/api/alocacoes/`
 - **Métodos**: `POST`
 - **Descrição**: Cria uma nova alocação associando programadores a um projeto, com a possibilidade de definir as horas alocadas.
 - **Parâmetros**: Deve ser enviado no corpo da requisição o projeto_id, programadores_id, e opcionalmente as horas.
 
-### 3. Atualizar Alocação - /alocacoes/{id}/
+### 3. Atualizar Alocação - /api/alocacoes/{id}/
 
 - **Endpoint**: `/api/alocacoes/{id}/`
 - **Métodos**: `PUT, PATCH`
@@ -64,68 +64,68 @@ Após a instalação, a aplicação estará disponível no endereço: http://loc
 - **Parâmetros**: O ID da alocação deve ser especificado na URL, e os dados a serem atualizados no corpo da requisição.
 
 
-### 4. Excluir Alocação - /alocacoes/{id}/
+### 4. Excluir Alocação - /api/alocacoes/{id}/
 
 - **Endpoint**: `/api/alocacoes/{id}/`
 - **Métodos**: `DELETE`
 - **Descrição**: Exclui uma alocação existente, removendo-a da base de dados.
 - **Parâmetros**: O ID da alocação a ser excluída deve ser especificado na URL.
 
-### 5. Listar Programadores - /programadores/
+### 5. Listar Programadores - /api/programadores/
 
 - **Endpoint**: `/api/programadores/`
 - **Métodos**: `GET`
 - **Descrição**: Retorna a lista de todos os programadores cadastrados.
 
-### 6. Criar Programador - /programadores/
+### 6. Criar Programador - /api/programadores/
 
 - **Endpoint**: `/api/programadores/`
 - **Métodos**: `POST`
 - **Descrição**: Cria um novo programador com as informações fornecidas, como nome e tecnologias associadas.
 - **Parâmetros**: No corpo da requisição deve ser enviado o nome do programador e as tecnologias.
 
-### 7. Atualizar Programador - /programadores/{id}/
+### 7. Atualizar Programador - /api/programadores/{id}/
 
 - **Endpoint**: `/api/programadores/{id}/`
 - **Métodos**: `PUT, PATCH`
 - **Descrição**: Atualiza os dados de um programador, como nome e tecnologias associadas.
 - **Parâmetros**: O ID do programador deve ser especificado na URL, e os dados a serem atualizados no corpo da requisição.
 
-### 8. Excluir Programador - /programadores/{id}/
+### 8. Excluir Programador - /api/programadores/{id}/
 
 - **Endpoint**: `/api/programadores/{id}/`
 - **Métodos**: `DELETE`
 - **Descrição**: Exclui um programador existente.
 - **Parâmetros**: O ID do programador a ser excluído deve ser especificado na URL.
 
-### 9. Listar Projetos - /projetos/
+### 9. Listar Projetos - /api/projetos/
 
 - **Endpoint**: `/api/projetos/`
 - **Métodos**: `GET`
 - **Descrição**: Retorna a lista de todos os projetos cadastrados.
 
-### 10. Criar Projeto - /projetos/
+### 10. Criar Projeto - /api/projetos/
 
 - **Endpoint**: `/api/projetos/`
 - **Métodos**: `POST`
 - **Descrição**: Cria um novo projeto com as informações fornecidas, como nome e horas disponíveis por dia.
 - **Parâmetros**: No corpo da requisição devem ser enviados o nome do projeto e as horas disponíveis por dia.
 
-### 11. Atualizar Projeto - /projetos/{id}/
+### 11. Atualizar Projeto - /api/projetos/{id}/
 
 - **Endpoint**: `/api/projetos/{id}/`
 - **Métodos**: `PUT, PATCH`
 - **Descrição**: Atualiza os dados de um projeto, como nome e horas disponíveis por dia.
 - **Parâmetros**: O ID do projeto deve ser especificado na URL, e os dados a serem atualizados no corpo da requisição.
 
-### 12. Excluir Projeto - /projetos/{id}/
+### 12. Excluir Projeto - /api/projetos/{id}/
 
 - **Endpoint**: `/api/projetos/{id}/`
 - **Métodos**: `DELETE`
 - **Descrição**: Exclui um projeto existente.
 - **Parâmetros**: O ID do projeto a ser excluído deve ser especificado na URL.
 
-### 13. Cadastro de Usuário - /register
+### 13. Cadastro de Usuário - /register/
 
 - **Endpoint**: `/api/users/register/`
 - **Métodos**: `POST`
@@ -138,7 +138,7 @@ Após a instalação, a aplicação estará disponível no endereço: http://loc
 - **Descrição**: Gera tokens JWT (access e refresh) para autenticar o usuário.
 authorized`: Credenciais inválidas.
 
-### 15. Atualizar o Token de Acesso (Refresh Token) - token/refresh/
+### 15. Atualizar o Token de Acesso (Refresh Token) - /token/refresh/
 
 - **Endpoint**: `/api/token/refresh/`
 - **Métodos**:`POST`
