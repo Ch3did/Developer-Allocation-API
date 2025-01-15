@@ -27,24 +27,21 @@ class AlocacaoViewSet(viewsets.ModelViewSet):
         validated_data = serializer.validated_data
 
         try:
-            programadores = self._validar_programadores(
-                validated_data.get("programadores_id", [])
+            programador = self._validar_programador(
+                validated_data.get("programador_id")
             )
             projeto = self._validar_projeto(validated_data["projeto_id"])
 
-            alocacao = Alocacao.objects.create(
-                projeto=projeto,
-            )
+            alocacao = Alocacao.objects.create(projeto=projeto, programador=programador)
 
             if horas := validated_data.get("horas"):
                 alocacao.horas = horas
 
-            self._validar_horas(alocacao.horas, programadores, projeto)
+            self._validar_horas(alocacao)
 
         except ValidationError as e:
             return Response({"error": e.args[0]}, status=status.HTTP_400_BAD_REQUEST)
 
-        alocacao.programador.set(programadores)
         alocacao.save()
 
         return Response(
@@ -69,31 +66,23 @@ class AlocacaoViewSet(viewsets.ModelViewSet):
         validated_data = serializer.validated_data
 
         try:
-            alocacao = Alocacao.objects.get(id=validated_data["alocacao_id"])
-        except Alocacao.DoesNotExist:
-            return Response(
-                {
-                    "error": f"""Alocação com ID {validated_data['alocacao_id']}
-                    não encontrada."""
-                },
-                status=status.HTTP_404_NOT_FOUND,
-            )
+            alocacao = self._validar_alocacao(validated_data.get("alocacao_id"))
 
-        try:
-            programadores = self._validar_programadores(
-                validated_data.get("programadores_id", [])
-            )
-            projeto = self._validar_projeto(validated_data["projeto_id"])
+            if programador_id := validated_data.get("programador_id"):
+                programador = self._validar_programador(programador_id)
+                alocacao.programador = programador
+
+            if projeto_id := validated_data.get("projeto_id"):
+                projeto = self._validar_projeto(projeto_id)
+                alocacao.projeto = projeto
+
+            if horas := validated_data.get("horas"):
+                alocacao.horas = horas
+                self._validar_horas(horas, alocacao)
+
         except ValidationError as e:
             return Response({"error": e.args[0]}, status=status.HTTP_400_BAD_REQUEST)
 
-        if "horas" in validated_data:
-            horas = validated_data["horas"]
-            self._validar_horas(horas, programadores, projeto)
-            alocacao.horas = horas
-
-        alocacao.projeto = projeto
-        alocacao.programador.set(programadores)
         alocacao.save()
 
         return Response(
@@ -101,31 +90,38 @@ class AlocacaoViewSet(viewsets.ModelViewSet):
             status=status.HTTP_200_OK,
         )
 
-    def _validar_programadores(self, programadores_data):
-        tecnologias = []
-        for id_programador in programadores_data:
-            try:
-                tecnologia = Programador.objects.get(id=id_programador)
-                tecnologias.append(tecnologia)
-            except Programador.DoesNotExist:
-                raise ValidationError(
-                    f"Programador com ID {id_programador} não encontrada."
-                )
-        return tecnologias
+    def _validar_alocacao(self, alocacao_id: int) -> Alocacao | Exception:
+        try:
+            alocacao = Alocacao.objects.get(id=alocacao_id)
+        except Alocacao.DoesNotExist:
+            raise ValidationError(f"Alocacao com ID {alocacao_id} não encontrada.")
+        return alocacao
 
-    def _validar_projeto(self, projeto_id):
+    def _validar_programador(self, id_programador: int) -> Programador | Exception:
+        """Valida programador existe"""
+        try:
+            programador = Programador.objects.get(id=id_programador)
+        except Programador.DoesNotExist:
+            raise ValidationError(
+                f"Programador com ID {id_programador} não encontrada."
+            )
+        return programador
+
+    def _validar_projeto(self, projeto_id: int) -> Projeto | Exception:
+        """Valida projeto existe"""
         try:
             projeto = Projeto.objects.get(id=projeto_id)
         except projeto.DoesNotExist:
             raise ValidationError(f"Projeto com ID {projeto_id} não encontrada.")
         return projeto
 
-    def _validar_horas(self, horas, programadores, projeto):
-        if horas <= (projeto.horas_por_dia * len(programadores)):
-            return Response(
-                {
-                    "error": """As horas alocadas por desenvolvedor
-                    excedem o limite projeto."""
-                },
-                status=status.HTTP_400_BAD_REQUEST,
+    def _validar_horas(self, alocacao: Alocacao) -> None | Exception:
+        """Compara as horas alocadas + novas horas com o limite do projeto"""
+        total_horas = alocacao.projeto.get_total_horas()
+        horas_alocadas = alocacao.get_horas_alocadas(alocacao.projeto.id)
+
+        if total_horas < (horas_alocadas + alocacao.horas):
+            raise ValidationError(
+                f"""As novas horas alocadas excedem o limite para o
+                projeto em {(horas_alocadas + alocacao.horas)-total_horas}."""
             )
