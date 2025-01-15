@@ -1,5 +1,6 @@
 from rest_framework import status, views
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
 from ..serializers.user_serializer import UserSerializer
@@ -19,6 +20,8 @@ class HealthCheckView(views.APIView):
 
 
 class RegisterUserView(views.APIView):
+    permission_classes = [AllowAny]
+
     def post(self, request):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
