@@ -1,9 +1,11 @@
-from .alocacao_serializer import (AlocacaoSerializer, AlocacaoSerializerCreate,
-                                  AlocacaoSerializerUpdate)
-from .programador_serializer import (ProgramadorSerializer,
-                                     ProgramadorSerializerCreate,
-                                     ProgramadorSerializerUpdate)
-from .projeto_serializer import (ProjetoSerializer, ProjetoSerializerCreate,
-                                 ProjetoSerializerUpdate)
-from .tecnologia_serializer import (TecnologiaSerializer,
-                                    TecnologiaSerializerUpdate)
+from .alocacao_serializer import AlocacaoSerializer  # noqa: F401
+from .alocacao_serializer import AlocacaoSerializerCreate  # noqa: F401
+from .alocacao_serializer import AlocacaoSerializerUpdate  # noqa: F401
+from .programador_serializer import ProgramadorSerializer  # noqa: F401
+from .programador_serializer import ProgramadorSerializerCreate  # noqa: F401
+from .programador_serializer import ProgramadorSerializerUpdate  # noqa: F401
+from .projeto_serializer import ProjetoSerializer  # noqa: F401
+from .projeto_serializer import ProjetoSerializerCreate  # noqa: F401
+from .projeto_serializer import ProjetoSerializerUpdate  # noqa: F401
+from .tecnologia_serializer import TecnologiaSerializer  # noqa: F401
+from .tecnologia_serializer import TecnologiaSerializerUpdate  # noqa: F401

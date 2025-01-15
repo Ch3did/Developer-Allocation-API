@@ -1,4 +1,4 @@
-from .alocacao import Alocacao
-from .programador import Programador
-from .projeto import Projeto
-from .tecnologia import Tecnologia
+from .alocacao import Alocacao  # noqa: F401
+from .programador import Programador  # noqa: F401
+from .projeto import Projeto  # noqa: F401
+from .tecnologia import Tecnologia  # noqa: F401
