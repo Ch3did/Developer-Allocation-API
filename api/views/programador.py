@@ -4,11 +4,10 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from ..views.base  import CustomPagination
-
 from ..models import Programador, Tecnologia
 from ..serializers import (ProgramadorSerializer, ProgramadorSerializerCreate,
                            ProgramadorSerializerUpdate)
+from ..views.base import CustomPagination
 
 
 class ProgramadorViewSet(viewsets.ModelViewSet):

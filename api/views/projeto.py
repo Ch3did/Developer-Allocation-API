@@ -4,18 +4,17 @@ from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from ..views.base  import CustomPagination
-
 from ..models import Projeto, Tecnologia
 from ..serializers import (ProjetoSerializer, ProjetoSerializerCreate,
                            ProjetoSerializerUpdate)
+from ..views.base import CustomPagination
 
 
 class ProjetoViewSet(viewsets.ModelViewSet):
     queryset = Projeto.objects.all()
     serializer_class = ProjetoSerializer
     pagination_class = CustomPagination
-    authentication_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     @extend_schema(
         summary="Cria Objeto Alocacao",

@@ -3,10 +3,9 @@ from rest_framework import status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from ..views.base  import CustomPagination
-
 from ..models import Tecnologia
 from ..serializers import TecnologiaSerializer, TecnologiaSerializerUpdate
+from ..views.base import CustomPagination
 
 
 class TecnologiaViewSet(viewsets.ModelViewSet):
