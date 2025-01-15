@@ -59,88 +59,82 @@ Após a instalação, a aplicação estará disponível no endereço: http://loc
 - **Descrição**: Atualiza os dados de uma alocação existente, incluindo a associação de programadores e o número de horas.
 - **Parâmetros**: O ID da alocação deve ser especificado na URL, e os dados a serem atualizados no corpo da requisição.
 
-### 4. Atualizar Parciais de Alocação - /alocacoes/{id}/
 
-- **Endpoint**: `/api/alocacoes/{id}/`
-- **Métodos**: `PATCH`
-- **Descrição**: Atualiza parcialmente os dados de uma alocação, permitindo a modificação de programadores ou horas alocadas.
-- **Parâmetros**: O ID da alocação deve ser especificado na URL e os campos a serem atualizados no corpo da requisição.
-
-### 5. Excluir Alocação - /alocacoes/{id}/
+### 4. Excluir Alocação - /alocacoes/{id}/
 
 - **Endpoint**: `/api/alocacoes/{id}/`
 - **Métodos**: `DELETE`
 - **Descrição**: Exclui uma alocação existente, removendo-a da base de dados.
 - **Parâmetros**: O ID da alocação a ser excluída deve ser especificado na URL.
 
-### 6. Listar Programadores - /programadores/
+### 5. Listar Programadores - /programadores/
 
 - **Endpoint**: `/api/programadores/`
 - **Métodos**: `GET`
 - **Descrição**: Retorna a lista de todos os programadores cadastrados.
 
-### 7. Criar Programador - /programadores/
+### 6. Criar Programador - /programadores/
 
 - **Endpoint**: `/api/programadores/`
 - **Métodos**: `POST`
 - **Descrição**: Cria um novo programador com as informações fornecidas, como nome e tecnologias associadas.
 - **Parâmetros**: No corpo da requisição deve ser enviado o nome do programador e as tecnologias.
 
-### 8. Atualizar Programador - /programadores/{id}/
+### 7. Atualizar Programador - /programadores/{id}/
 
 - **Endpoint**: `/api/programadores/{id}/`
 - **Métodos**: `PUT, PATCH`
 - **Descrição**: Atualiza os dados de um programador, como nome e tecnologias associadas.
 - **Parâmetros**: O ID do programador deve ser especificado na URL, e os dados a serem atualizados no corpo da requisição.
 
-### 9. Excluir Programador - /programadores/{id}/
+### 8. Excluir Programador - /programadores/{id}/
 
 - **Endpoint**: `/api/programadores/{id}/`
 - **Métodos**: `DELETE`
 - **Descrição**: Exclui um programador existente.
 - **Parâmetros**: O ID do programador a ser excluído deve ser especificado na URL.
 
-### 10. Listar Projetos - /projetos/
+### 9. Listar Projetos - /projetos/
 
 - **Endpoint**: `/api/projetos/`
 - **Métodos**: `GET`
 - **Descrição**: Retorna a lista de todos os projetos cadastrados.
 
-### 11. Criar Projeto - /projetos/
+### 10. Criar Projeto - /projetos/
 
 - **Endpoint**: `/api/projetos/`
 - **Métodos**: `POST`
 - **Descrição**: Cria um novo projeto com as informações fornecidas, como nome e horas disponíveis por dia.
 - **Parâmetros**: No corpo da requisição devem ser enviados o nome do projeto e as horas disponíveis por dia.
 
-### 12. Atualizar Projeto - /projetos/{id}/
+### 11. Atualizar Projeto - /projetos/{id}/
 
 - **Endpoint**: `/api/projetos/{id}/`
 - **Métodos**: `PUT, PATCH`
 - **Descrição**: Atualiza os dados de um projeto, como nome e horas disponíveis por dia.
 - **Parâmetros**: O ID do projeto deve ser especificado na URL, e os dados a serem atualizados no corpo da requisição.
 
-### 13. Excluir Projeto - /projetos/{id}/
+### 12. Excluir Projeto - /projetos/{id}/
 
 - **Endpoint**: `/api/projetos/{id}/`
 - **Métodos**: `DELETE`
 - **Descrição**: Exclui um projeto existente.
 - **Parâmetros**: O ID do projeto a ser excluído deve ser especificado na URL.
 
-### 14. Cadastro de Usuário - /register
+### 13. Cadastro de Usuário - /register
 
 - **Endpoint**: `/api/users/register/`
 - **Métodos**: `POST`
 - **Descrição**: Cria um novo usuário no sistema.
 
-### 15. Autenticação (Obter Tokens JWT) - /token/
+### 14. Autenticação (Obter Tokens JWT) - /token/
 
 - **Endpoint**: `/api/token/`
 - **Métodos**: `POST`
 - **Descrição**: Gera tokens JWT (access e refresh) para autenticar o usuário.
 authorized`: Credenciais inválidas.
 
-### 16. Atualizar o Token de Acesso (Refresh Token) - token/refresh/
+### 15. Atualizar o Token de Acesso (Refresh Token) - token/refresh/
 
 - **Endpoint**: `/api/token/refresh/`
 - **Métodos**:`POST`
