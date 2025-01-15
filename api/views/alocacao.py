@@ -32,6 +32,8 @@ class AlocacaoViewSet(viewsets.ModelViewSet):
             )
             projeto = self._validar_projeto(validated_data["projeto_id"])
 
+            self._validar_tecnologias_no_projeto(projeto, programador)
+
             alocacao = Alocacao.objects.create(projeto=projeto, programador=programador)
 
             if horas := validated_data.get("horas"):
@@ -80,6 +82,8 @@ class AlocacaoViewSet(viewsets.ModelViewSet):
                 alocacao.horas = horas
                 self._validar_horas(horas, alocacao)
 
+            self._validar_tecnologias_no_projeto(alocacao.projeto, alocacao.programador)
+
         except ValidationError as e:
             return Response({"error": e.args[0]}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -125,3 +129,20 @@ class AlocacaoViewSet(viewsets.ModelViewSet):
                 f"""As novas horas alocadas excedem o limite para o
                 projeto em {(horas_alocadas + alocacao.horas)-total_horas}."""
             )
+
+    def _validar_tecnologias_no_projeto(
+        self, projeto: Projeto, programador: Programador
+    ) -> None | Exception:
+        """Função para verificar se ao menos uma tecnologia
+        do programador está associada ao projeto.
+        """
+        tecnologias_do_programador = programador.tecnologias.all()
+
+        for tecnologia in tecnologias_do_programador:
+            if projeto.tecnologias.filter(nome=tecnologia.nome):
+                return
+
+        raise ValidationError(
+            f"""{programador.nome} não possui as tecnologias
+            necessárias para ser alocado neste projeto."""
+        )
