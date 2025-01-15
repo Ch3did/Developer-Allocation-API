@@ -1,8 +1,9 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework import status, viewsets
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.views.pagination import CustomPagination
+from ..views.base  import CustomPagination
 
 from ..models import Tecnologia
 from ..serializers import TecnologiaSerializer, TecnologiaSerializerUpdate
@@ -12,6 +13,7 @@ class TecnologiaViewSet(viewsets.ModelViewSet):
     queryset = Tecnologia.objects.all()
     serializer_class = TecnologiaSerializer
     pagination_class = CustomPagination
+    authentication_classes = [IsAuthenticated]
 
     def update(self, request, *args, **kwargs):
         return self._custom_update(request, *args, **kwargs)

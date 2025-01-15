@@ -18,9 +18,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from rest_framework_simplejwt.views import (TokenObtainPairView,
+                                            TokenRefreshView)
 
 from api.url import urlpatterns
-from verzel_alocator.views import HealthCheckView
+from api.views.base import HealthCheckView
 
 urlpatterns = [
     # Rota do Django Admin
@@ -40,5 +42,9 @@ urlpatterns = [
         name="swagger-ui",
     ),
     # Endpoint do esquema OpenAPI
-    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("schema/", SpectacularAPIView.as_view(), name="schema"),
+    # Obtain token
+    path("token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    # refresh token
+    path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]

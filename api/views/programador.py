@@ -1,9 +1,10 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework import status, viewsets
 from rest_framework.exceptions import ValidationError
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.views.pagination import CustomPagination
+from ..views.base  import CustomPagination
 
 from ..models import Programador, Tecnologia
 from ..serializers import (ProgramadorSerializer, ProgramadorSerializerCreate,
@@ -14,6 +15,7 @@ class ProgramadorViewSet(viewsets.ModelViewSet):
     queryset = Programador.objects.all()
     serializer_class = ProgramadorSerializer
     pagination_class = CustomPagination
+    authentication_classes = [IsAuthenticated]
 
     @extend_schema(
         summary="Cria Objeto Alocacao",

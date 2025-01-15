@@ -1,9 +1,10 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework import status, viewsets
 from rest_framework.exceptions import ValidationError
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.views.pagination import CustomPagination
+from ..views.base  import CustomPagination
 
 from ..models import Projeto, Tecnologia
 from ..serializers import (ProjetoSerializer, ProjetoSerializerCreate,
@@ -14,6 +15,7 @@ class ProjetoViewSet(viewsets.ModelViewSet):
     queryset = Projeto.objects.all()
     serializer_class = ProjetoSerializer
     pagination_class = CustomPagination
+    authentication_classes = [IsAuthenticated]
 
     @extend_schema(
         summary="Cria Objeto Alocacao",
@@ -83,7 +85,8 @@ class ProjetoViewSet(viewsets.ModelViewSet):
             "horas_por_dia", projeto.horas_por_dia
         )
 
-        # TODO: add validacao caso exista alocacao pro projeto, validar se as horas alocadas n vao estourar
+        # TODO: add validacao caso exista alocacao pro projeto,
+        # validar se as horas alocadas n vao estourar
 
         projeto.save()
 

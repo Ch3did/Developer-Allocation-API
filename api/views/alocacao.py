@@ -1,9 +1,10 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework import status, viewsets
 from rest_framework.exceptions import ValidationError
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from api.views.pagination import CustomPagination
+from ..views.base  import CustomPagination
 
 from ..models import Alocacao, Programador, Projeto
 from ..serializers import (AlocacaoSerializer, AlocacaoSerializerCreate,
@@ -14,6 +15,7 @@ class AlocacaoViewSet(viewsets.ModelViewSet):
     queryset = Alocacao.objects.all()
     serializer_class = AlocacaoSerializer
     pagination_class = CustomPagination
+    authentication_classes = [IsAuthenticated]
 
     @extend_schema(
         summary="Cria Objeto Alocacao",
@@ -72,7 +74,8 @@ class AlocacaoViewSet(viewsets.ModelViewSet):
         except Alocacao.DoesNotExist:
             return Response(
                 {
-                    "error": f"Alocação com ID {validated_data['alocacao_id']} não encontrada."
+                    "error": f"""Alocação com ID {validated_data['alocacao_id']}
+                    não encontrada."""
                 },
                 status=status.HTTP_404_NOT_FOUND,
             )
@@ -122,7 +125,8 @@ class AlocacaoViewSet(viewsets.ModelViewSet):
         if horas <= (projeto.horas_por_dia * len(programadores)):
             return Response(
                 {
-                    "error": "As horas alocadas por desenvolvedor excedem o limite projeto."
+                    "error": """As horas alocadas por desenvolvedor
+                    excedem o limite projeto."""
                 },
                 status=status.HTTP_400_BAD_REQUEST,
             )
