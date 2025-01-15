@@ -22,6 +22,10 @@ class HealthCheckView(views.APIView):
 
 
 class RegisterUserView(views.APIView):
+    """
+    View para cadastrar usuarios da aplicacao.
+    """
+
     permission_classes = [AllowAny]
 
     def post(self, request):
