@@ -1,32 +1,32 @@
 from django.contrib import admin
 
-from .models import Alocacao, Programador, Projeto, Tecnologia
+from .models import Assignment, Developers, Project, Technology
 
 
-@admin.register(Tecnologia)
-class TecnologiaAdmin(admin.ModelAdmin):
-    list_display = ("id", "nome")
-    search_fields = ("nome",)
-    ordering = ("nome",)
+@admin.register(Technology)
+class TechnologyAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+    search_fields = ("name",)
+    ordering = ("name",)
 
 
-@admin.register(Programador)
-class ProgramadorAdmin(admin.ModelAdmin):
-    list_display = ("id", "nome")
-    search_fields = ("nome",)
-    filter_horizontal = ("tecnologias",)
+@admin.register(Developers)
+class DevelopersAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+    search_fields = ("name",)
+    filter_horizontal = ("technologies",)
 
 
-@admin.register(Projeto)
-class ProjetoAdmin(admin.ModelAdmin):
-    list_display = ("id", "nome", "data_inicial", "data_final")
-    search_fields = ("nome",)
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ("id", "name", "data_inicial", "data_final")
+    search_fields = ("name",)
     list_filter = ("data_inicial", "data_final")
-    filter_horizontal = ("tecnologias",)
+    filter_horizontal = ("technologies",)
 
 
-@admin.register(Alocacao)
-class AlocacaoAdmin(admin.ModelAdmin):
-    list_display = ("id", "projeto", "programador", "horas")
-    search_fields = ("projeto__nome", "programador__nome")
-    list_filter = ("projeto", "programador")
+@admin.register(Assignment)
+class AssignmentAdmin(admin.ModelAdmin):
+    list_display = ("id", "project", "developer", "hours")
+    search_fields = ("project__name", "developer__name")
+    list_filter = ("project", "developer")
