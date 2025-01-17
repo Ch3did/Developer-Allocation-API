@@ -7,10 +7,10 @@ from .project import Project
 
 class Assignment(models.Model):
     project = models.ForeignKey(
-        Project, on_delete=models.CASCADE, related_name="alocacoes"
+        Project, on_delete=models.CASCADE, related_name="assignment"
     )
     developers = models.ForeignKey(
-        Developers, on_delete=models.CASCADE, related_name="alocacoes"
+        Developers, on_delete=models.CASCADE, related_name="assignment"
     )
     hours = models.PositiveIntegerField(default=8)
 

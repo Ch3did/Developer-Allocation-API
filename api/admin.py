@@ -27,6 +27,6 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(Assignment)
 class AssignmentAdmin(admin.ModelAdmin):
-    list_display = ("id", "project", "developer", "hours")
-    search_fields = ("project__name", "developer__name")
-    list_filter = ("project", "developer")
+    list_display = ("id", "project", "developers", "hours")
+    search_fields = ("project__name", "developers__name")
+    list_filter = ("project", "developers")
