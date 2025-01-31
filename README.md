@@ -1,4 +1,4 @@
-# VERZEL - **Developer Allocation API**  
+# **Developer Allocation API**  
 
 ## Overview
 A Developer Allocation API é uma aplicação escrita em Django, projetada para gerenciar e realizar a alocação de desenvolvedores de software em projetos. 
