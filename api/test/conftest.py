@@ -3,7 +3,7 @@ from datetime import date
 import pytest
 from rest_framework.test import APIClient
 
-from ..models import Programador, Projeto, Tecnologia
+from ..models import Developers, Project, Technology
 
 
 @pytest.fixture
@@ -24,41 +24,41 @@ def get_jwt(api_client) -> str:
 
 
 @pytest.fixture
-def dummy_programador_1() -> Programador:
-    programador = Programador.objects.create(nome="Carlos")
-    tecnologia = Tecnologia.objects.create(nome="Python")
-    programador.tecnologias.set([tecnologia])
-    return programador
+def dummy_developers_1() -> Developers:
+    developers = Developers.objects.create(name="Carlos")
+    technology = Technology.objects.create(name="Python")
+    developers.technologies.set([technology])
+    return developers
 
 
 @pytest.fixture
-def dummy_programador_2() -> Programador:
-    programador = Programador.objects.create(nome="Joao")
-    tecnologia = Tecnologia.objects.create(nome="JavaScript")
-    programador.tecnologias.set([tecnologia])
-    return programador
+def dummy_developers_2() -> Developers:
+    developers = Developers.objects.create(name="Joao")
+    technology = Technology.objects.create(name="JavaScript")
+    developers.technologies.set([technology])
+    return developers
 
 
 @pytest.fixture
-def dummy_projeto_1() -> Projeto:
-    projeto1 = Projeto.objects.create(
-        nome="Projeto Teste Python",
+def dummy_project_1() -> Project:
+    project1 = Project.objects.create(
+        name="Project Teste Python",
         data_inicial=date(2025, 1, 1),
         data_final=date(2025, 12, 31),
     )
-    tecnologia1 = Tecnologia.objects.create(nome="Python")
-    tecnologia2 = Tecnologia.objects.create(nome="PHP")
-    projeto1.tecnologias.set([tecnologia1, tecnologia2])
-    return projeto1
+    technology1 = Technology.objects.create(name="Python")
+    technology2 = Technology.objects.create(name="PHP")
+    project1.technologies.set([technology1, technology2])
+    return project1
 
 
 @pytest.fixture
-def dummy_projeto_2() -> Projeto:
-    projeto2 = Projeto.objects.create(
-        nome="Projeto Teste Javascrip",
+def dummy_project_2() -> Project:
+    project2 = Project.objects.create(
+        name="Project Teste Javascrip",
         data_inicial=date(2025, 6, 1),
         data_final=date(2025, 12, 31),
     )
-    tecnologia = Tecnologia.objects.create(nome="JavaScript")
-    projeto2.tecnologias.set([tecnologia])
-    return projeto2
+    technology = Technology.objects.create(name="JavaScript")
+    project2.technologies.set([technology])
+    return project2

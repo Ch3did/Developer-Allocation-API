@@ -3,14 +3,14 @@ from rest_framework import status, viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from ..models import Tecnologia
-from ..serializers import TecnologiaSerializer, TecnologiaSerializerUpdate
-from ..views.base import CustomPagination
+from ..models import Technology
+from ..serializers import TechnologySerializer, TechnologySerializerUpdate
+from .base import CustomPagination
 
 
-class TecnologiaViewSet(viewsets.ModelViewSet):
-    queryset = Tecnologia.objects.all()
-    serializer_class = TecnologiaSerializer
+class TechnologiesViewSet(viewsets.ModelViewSet):
+    queryset = Technology.objects.all()
+    serializer_class = TechnologySerializer
     pagination_class = CustomPagination
     permission_classes = [IsAuthenticated]
 
@@ -23,17 +23,17 @@ class TecnologiaViewSet(viewsets.ModelViewSet):
     @extend_schema(
         summary="Centraliza update do Objeto Alocacao",
         description="",
-        request=TecnologiaSerializerUpdate,
+        request=TechnologySerializerUpdate,
     )
     def _custom_update(self, request, *args, **kwargs):
-        serializer = TecnologiaSerializerUpdate(data=request.data)
+        serializer = TechnologySerializerUpdate(data=request.data)
         serializer.is_valid(raise_exception=True)
         validated_data = serializer.validated_data
-        tecnologia = Tecnologia.objects.get(id=validated_data["tecnologia_id"])
+        technology = Technology.objects.get(id=validated_data["technology_id"])
 
-        tecnologia.nome = validated_data.get("nome", tecnologia.nome)
+        technology.name = validated_data.get("name", technology.name)
 
-        tecnologia.save()
+        technology.save()
         return Response(
             {"message": "Atualizado com sucesso!"}, status=status.HTTP_200_OK
         )

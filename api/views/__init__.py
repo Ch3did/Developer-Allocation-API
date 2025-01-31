@@ -1,4 +1,4 @@
-from ..views.alocacao import AlocacaoViewSet  # noqa: F401
-from ..views.programador import ProgramadorViewSet  # noqa: F401
-from ..views.projeto import ProjetoViewSet  # noqa: F401
-from ..views.tecnologia import TecnologiaViewSet  # noqa: F401
+from ..views.project import ProjectsViewSet  # noqa: F401
+from .assignment import AssignmentViewSet  # noqa: F401
+from .developers import DevelopersViewSet  # noqa: F401
+from .technology import TechnologiesViewSet  # noqa: F401

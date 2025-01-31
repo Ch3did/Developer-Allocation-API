@@ -1,12 +1,12 @@
 from rest_framework.routers import DefaultRouter
 
-from .views import (AlocacaoViewSet, ProgramadorViewSet, ProjetoViewSet,
-                    TecnologiaViewSet)
+from .views import (AssignmentViewSet, DevelopersViewSet, ProjectsViewSet,
+                    TechnologiesViewSet)
 
 router = DefaultRouter()
-router.register("tecnologias", TecnologiaViewSet)
-router.register("programadores", ProgramadorViewSet)
-router.register("projetos", ProjetoViewSet)
-router.register("alocacoes", AlocacaoViewSet)
+router.register("technologies", TechnologiesViewSet)
+router.register("developers", DevelopersViewSet)
+router.register("projects", ProjectsViewSet)
+router.register("assignment", AssignmentViewSet)
 
 urlpatterns = router.urls
